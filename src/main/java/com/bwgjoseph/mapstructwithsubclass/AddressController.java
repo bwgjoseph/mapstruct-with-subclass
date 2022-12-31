@@ -2,7 +2,9 @@ package com.bwgjoseph.mapstructwithsubclass;
 
 import java.time.LocalDateTime;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,6 +35,25 @@ public class AddressController {
         log.info("{}", addressDO);
 
         AddressResponseDto addressResponseDto = this.addressMapper.toDto(addressDO);
+        log.info("{}", addressResponseDto);
+
+        return addressResponseDto;
+    }
+
+    @PutMapping("/{id}")
+    public AddressResponseDto updateOne(@PathVariable("id") String addressId, @RequestBody AddressRequestDto addressRequestDto) {
+        AddressDO existingAddress = HomeAddressDO.builder()
+            .id(addressId)
+            .street("21 OAR")
+            .postalCode("123456")
+            .unit("123")
+            .auditable(Auditable.builder().createdBy("Joseph").createdAt(LocalDateTime.now()).build())
+            .build();
+
+        AddressDO addressDo = this.addressMapper.toUpdateDomainObject(addressRequestDto, existingAddress.toBuilder());
+
+        AddressResponseDto addressResponseDto = this.addressMapper.toDto(addressDo);
+
         log.info("{}", addressResponseDto);
 
         return addressResponseDto;

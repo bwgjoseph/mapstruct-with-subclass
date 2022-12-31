@@ -4,6 +4,7 @@ import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.SubclassExhaustiveStrategy;
 import org.mapstruct.SubclassMapping;
 
@@ -26,4 +27,12 @@ public interface AddressMapper {
 
     @InheritConfiguration(name = "toDto")
     OfficeAddressResponseDto toOfficeDto(OfficeAddressDO officeAddressDO);
+
+    @SubclassMapping(source = HomeAddressRequestDto.class, target = HomeAddressDO.class)
+    @SubclassMapping(source = OfficeAddressRequestDto.class, target = OfficeAddressDO.class)
+    AddressDO toUpdateDomainObject(AddressRequestDto addressRequestDto, @MappingTarget AddressDO.AddressDOBuilder<?, ?> addressDOBuilder);
+
+    HomeAddressDO toUpdateHomeDomainObject(HomeAddressRequestDto homeAddressRequestDto, @MappingTarget HomeAddressDO.HomeAddressDOBuilder<?, ?> homeAddressDOBuilder);
+
+    OfficeAddressDO toUpdateOfficeDomainObject(OfficeAddressRequestDto officeAddressRequestDto, @MappingTarget OfficeAddressDO.OfficeAddressDOBuilder<?, ?> officeAddressDOBuilder);
 }
