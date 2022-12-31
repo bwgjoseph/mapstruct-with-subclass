@@ -6,4 +6,4 @@ import lombok.Builder;
 
 @Builder
 @JsonTypeName("home")
-public record HomeAddressRequestDto(String street, String postalCode, String unit) implements AddressRequestDto {}
+public record HomeAddressRequestDto(String street, String postalCode, String unit, String createdBy, String createdAt) implements AddressRequestDto {}
