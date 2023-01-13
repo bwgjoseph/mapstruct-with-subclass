@@ -50,7 +50,7 @@ public class AddressController {
             .auditable(Auditable.builder().createdBy("Joseph").createdAt(LocalDateTime.now()).build())
             .build();
 
-        AddressDO addressDo = this.addressMapper.toUpdateDomainObject(addressRequestDto, existingAddress.toBuilder());
+        AddressDO addressDo = this.addressMapper.toUpdateDomainObject(addressRequestDto, existingAddress);
 
         AddressResponseDto addressResponseDto = this.addressMapper.toDto(addressDo);
 

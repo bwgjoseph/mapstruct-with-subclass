@@ -14,4 +14,7 @@ public abstract class AddressDO {
 
     private String id;
     private Auditable auditable;
+    private CountryInput country;
+    private GeoJsonPoint location;
+    private Long version;
 }
